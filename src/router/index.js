@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import New from '../views/New.vue'
-import Tasks from '@/views/Tasks.vue'
-import Task from '@/views/Task.vue'
+import Tasks from '../views/Tasks.vue'
+import Task from '../views/Task.vue'
+import NotFound from '../views/notFound.vue'
 
 const routes = [
   {
@@ -19,9 +20,12 @@ const routes = [
     name: 'TaskDetail',
     component: Task,
     props: true
+  },
+  {
+    path: '/:notFound(.*)',
+    name: 'NotFound',
+    component: NotFound
   }
-  // { path: '/task', component: Task }
-  // { path: '/:notFound(.*)', redirect: '/' }
 ]
 
 const router = createRouter({

@@ -45,19 +45,35 @@ export default {
       newFormatedDate.value = new Intl.DateTimeFormat('ru-RU', options).format(date)
     }
 
-    function addNewTask () {
+    function addNewTask () { // реализовать отмененную задачу если дата изначально просрочена
       formatDate()
-      store.getters.tasks.push(
-        {
-          id: store.getters.tasks.length + 1,
-          title: newTitle.value,
-          text: 'Активен',
-          deadline: newFormatedDate.value,
-          type: 'primary',
-          description: newDescription.value
-        }
-      )
-      router.push('/')
+      // console.log(parseInt(new Date(newDate.value).toLocaleDateString()))
+      // console.log(parseInt(new Date().toLocaleDateString()))
+      if (parseInt(new Date(newDate.value).toLocaleDateString()) >= parseInt(new Date().toLocaleDateString())) {
+        store.getters.tasks.push(
+          {
+            id: store.getters.tasks.length + 1,
+            title: newTitle.value,
+            text: 'Активен',
+            deadline: newFormatedDate.value,
+            type: 'primary',
+            description: newDescription.value
+          }
+        )
+        router.push('/')
+      } else {
+        store.getters.tasks.push(
+          {
+            id: store.getters.tasks.length + 1,
+            title: newTitle.value,
+            text: 'Отменен',
+            deadline: newFormatedDate.value,
+            type: 'danger',
+            description: newDescription.value
+          }
+        )
+        router.push('/')
+      }
     }
 
     return {
@@ -69,7 +85,7 @@ export default {
     }
   },
   computed: {
-    isDisabled () { // валидация полей и включение кнопки
+    isDisabled () {
       if (this.newTitle.length > 0 & this.newDate.length > 1 & this.newDescription.length > 1) {
         return false
       } else return true

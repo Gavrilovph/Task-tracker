@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <template v-if="$store.state.tasks">
-    <h3 class="text-white">Всего активных задач: {{ tasks.length }}</h3>
+    <h3 class="text-white">Всего активных задач: {{ activeAndInProgressCount }}</h3>
     <div class="card" v-for="task in tasks" :key="task.id">
       <h2 class="card-title">
         <!-- Название задачи --> {{ task.title }}
@@ -39,6 +39,11 @@ export default {
   computed: {
     tasks () {
       return this.$store.state.tasks
+    },
+    activeAndInProgressCount () {
+      return this.tasks.filter(task =>
+        task.text === 'Активен' || task.text === 'Выполняется'
+      ).length
     }
   }
 }
