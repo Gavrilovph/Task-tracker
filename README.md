@@ -1,5 +1,7 @@
 # cw_composition_api
 
+Light task tracker for day to day using. Vue3 + router + vuex + localStorage
+
 ## Project setup
 ```
 npm install
