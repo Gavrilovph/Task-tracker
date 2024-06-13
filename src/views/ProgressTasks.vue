@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <template v-if="$store.getters.tasks[0]">
-    <div class="card" v-for="task in tasks" :key="task.id">
+    <div class="card" v-for="task in showActiveTasks" :key="task.id">
       <h2 class="card-title">
         <!-- Название задачи --> {{ task.title }}
         <AppStatus :type="task.type" :text="task.text" />
@@ -36,7 +36,6 @@ export default {
 
     const deleteTask = (id) => {
       store.commit('deleteTask', id)
-      // console.log(id)
     }
 
     return {
@@ -46,8 +45,16 @@ export default {
   },
   components: { AppStatus },
   computed: {
-    tasks () {
-      return this.$store.getters.tasks
+    // tasks () {
+    //   return this.$store.getters.tasks
+    // },
+    showActiveTasks () {
+      return this.$store.getters.tasks.filter(task => task.text === 'Выполняется')
+    },
+    activeAndInProgressCount () {
+      return this.$store.getters.tasks.filter(task =>
+        task.text === 'Активен' || task.text === 'Выполняется'
+      ).length
     }
   }
 }

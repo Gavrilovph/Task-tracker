@@ -32,18 +32,15 @@ export default {
     const tasks = store.getters.tasks
 
     const startTask = () => {
-      task.text = 'Выполняется'
-      task.type = 'warning'
+      store.commit('startTask', task.id - 1)
     }
 
     const finishTask = () => {
-      task.text = 'Завершен'
-      task.type = 'primary'
+      store.commit('finishTask', task.id - 1)
     }
 
     const cancelTask = () => {
-      task.text = 'Отменен'
-      task.type = 'danger'
+      store.commit('cancelTask', task.id - 1)
     }
 
     const showIdNotFoundMessage = () => {

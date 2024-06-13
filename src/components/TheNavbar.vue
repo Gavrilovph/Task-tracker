@@ -1,6 +1,6 @@
 <template>
   <header class="navbar">
-    <strong>Freelance</strong>
+    <strong>ToDoo List</strong>
 
     <ul class="navbar-menu">
       <li>

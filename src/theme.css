@@ -433,3 +433,9 @@ h3 {
 .text-white.center {
     text-align: center;
 }
+
+.upper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -45,26 +45,22 @@ export default {
       newFormatedDate.value = new Intl.DateTimeFormat('ru-RU', options).format(date)
     }
 
-    function addNewTask () { // реализовать отмененную задачу если дата изначально просрочена
+    function addNewTask () {
       formatDate()
-      // console.log(parseInt(new Date(newDate.value).toLocaleDateString()))
-      // console.log(parseInt(new Date().toLocaleDateString()))
       if (parseInt(new Date(newDate.value).toLocaleDateString()) >= parseInt(new Date().toLocaleDateString())) {
-        store.getters.tasks.push(
-          {
-            id: store.getters.tasks.length + 1,
-            title: newTitle.value,
-            text: 'Активен',
-            deadline: newFormatedDate.value,
-            type: 'primary',
-            description: newDescription.value
-          }
-        )
+        store.commit('addNewTask', {
+          id: store.getters.tasks.length === 0 ? 1 : store.getters.tasks[store.getters.tasks.length - 1].id + 1,
+          title: newTitle.value,
+          text: 'Активен',
+          deadline: newFormatedDate.value,
+          type: 'primary',
+          description: newDescription.value
+        })
         router.push('/')
       } else {
-        store.getters.tasks.push(
+        store.commit('addNewTask',
           {
-            id: store.getters.tasks.length + 1,
+            id: store.getters.tasks.length === 0 ? 1 : store.getters.tasks[store.getters.tasks.length - 1].id + 1,
             title: newTitle.value,
             text: 'Отменен',
             deadline: newFormatedDate.value,
