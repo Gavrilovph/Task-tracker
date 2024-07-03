@@ -1,6 +1,6 @@
 # cw_composition_api
 
-Light task tracker for day to day using. Vue3 + router + vuex + localStorage
+Light task tracker for day to day using. Vue3 composition API + router + vuex + localStorage
 
 ## Project setup
 ```
